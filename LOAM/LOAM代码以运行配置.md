@@ -1,11 +1,6 @@
 # LOAM代码及运行配置
 ## 一、代码阅读
 
-reference:
-
-https://zhuanlan.zhihu.com/p/145857388
-
-https://zhuanlan.zhihu.com/p/29719106
 
 LOAM的源码主要分为scanRegistration提取特征点、laserOdometry 10HZ估计位姿、laserMapping 1HZ构建三维地图、transforMaintenance 位姿优化等四个模块
 ### 1. scanRegistration.cpp
@@ -1271,3 +1266,10 @@ export LIBGL_ALWAYS_SOFTWARE=1
 
 重新实验，得到正确结果:
 ![](./result.png)
+
+## reference 
+reference:
+
+https://zhuanlan.zhihu.com/p/145857388
+
+https://zhuanlan.zhihu.com/p/29719106

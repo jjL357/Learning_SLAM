@@ -1,14 +1,5 @@
 # ALOAM学习
-code:
-https://github.com/HKUST-Aerial-Robotics/A-LOAM
 
-code with Chinese comments:
-
-https://github.com/XiaotaoGuo/a-loam-w-comment
-
-reference:
-
-https://xiaotaoguo.com/p/a-loam-kitti-helper/
 ## (一). kittiHelper.cpp
 kitti helper 的作用主要是读取 kitti 的数据并转化为 ros 消息发布或写入 rosbag 中，方便后续节点直接使用。
 
@@ -1434,3 +1425,15 @@ ceres solver的版本:1.14.0,版本过高ceres中的某些函数可能被更新�
 
 ### 运行结果:
 ![](./ALOAM_result.png)
+
+## reference 
+code:
+https://github.com/HKUST-Aerial-Robotics/A-LOAM
+
+code with Chinese comments:
+
+https://github.com/XiaotaoGuo/a-loam-w-comment
+
+reference:
+
+https://xiaotaoguo.com/p/a-loam-kitti-helper/
