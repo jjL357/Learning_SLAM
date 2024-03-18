@@ -304,7 +304,7 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudMsg)
   //lidar scan结束点的旋转角，加2*pi使点云旋转周期为2*pi
   float endOri = -atan2(laserCloudIn.points[cloudSize - 1].y,
                         laserCloudIn.points[cloudSize - 1].x) + 2 * M_PI;
-  //???
+  
   //结束方位角与开始方位角差值控制在(PI,3*PI)范围，允许lidar不是一个圆周扫描
   //正常情况下在这个范围内：pi < endOri - startOri < 3*pi，异常则修正
   if (endOri - startOri > 3 * M_PI) {
@@ -327,14 +327,14 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudMsg)
     float angle = atan(point.y / sqrt(point.x * point.x + point.z * point.z)) * 180 / M_PI;
     int scanID;
     //仰角四舍五入(加减0.5截断效果等于四舍五入)
-    int roundedAngle = int(angle + (angle<0.0?-0.5:+0.5)); 
+    int roundedAngle = int(angle + (angle<0.0-0.5:+0.5)); 
     if (roundedAngle > 0){
       scanID = roundedAngle;
     }
     else {
       scanID = roundedAngle + (N_SCANS - 1);
     }
-    //???
+    //
     //过滤点，只挑选[-15度，+15度]范围内的点,scanID属于[0,15]
     if (scanID > (N_SCANS - 1) || scanID < 0 ){
       count--;
@@ -344,7 +344,7 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudMsg)
     //该点的旋转角
     float ori = -atan2(point.x, point.z);
     if (!halfPassed) {//根据扫描线是否旋转过半选择与起始位置还是终止位置进行差值计算，从而进行补偿
-        //???
+        //
         //确保-pi/2 < ori - startOri < 3*pi/2
       if (ori < startOri - M_PI / 2) {
         ori += 2 * M_PI;
@@ -355,9 +355,9 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudMsg)
       if (ori - startOri > M_PI) {
         halfPassed = true;
       }
-    } else {//???
+    } else {//
       ori += 2 * M_PI;
-      //???
+      //
       //确保-3*pi/2 < ori - endOri < pi/2
       if (ori < endOri - M_PI * 3 / 2) {
         ori += 2 * M_PI;
@@ -365,7 +365,7 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudMsg)
         ori -= 2 * M_PI;
       } 
     }
-    //???
+    //
     //-0.5 < relTime < 1.5（点旋转的角度与整个周期旋转角度的比率, 即点云中点的相对时间）
     float relTime = (ori - startOri) / (endOri - startOri);
     //点强度=线号+点相对时间（即一个整数+一个小数，整数部分是线号，小数部分是该点的相对时间）,匀速扫描：根据当前扫描的角度和扫描周期计算相对扫描起始位置的时间
@@ -395,7 +395,7 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudMsg)
         imuShiftYCur = imuShiftY[imuPointerFront];
         imuShiftZCur = imuShiftZ[imuPointerFront];
       } else {//找到了点云时间戳小于IMU时间戳的IMU位置,则该点必处于imuPointerBack和imuPointerFront之间，据此线性插值，计算点云点的速度，位移和欧拉角
-        int imuPointerBack = (imuPointerFront + imuQueLength - 1) % imuQueLength;//???
+        int imuPointerBack = (imuPointerFront + imuQueLength - 1) % imuQueLength;//
         //按时间距离计算权重分配比率,也即线性插值
         float ratioFront = (timeScanCur + pointTime - imuTime[imuPointerBack]) 
                          / (imuTime[imuPointerFront] - imuTime[imuPointerBack]);
@@ -478,7 +478,7 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudMsg)
     cloudNeighborPicked[i] = 0;
     //初始化为less flat点
     cloudLabel[i] = 0;
-    //???
+    //
     //每个scan，只有第一个符合的点会进来，因为每个scan的点都在一起存放
     if (int(laserCloud->points[i].intensity) != scanCount) {
       scanCount = int(laserCloud->points[i].intensity);//控制每个scan只进入第一个点
