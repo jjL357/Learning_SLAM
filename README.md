@@ -3,7 +3,7 @@
 ### 论文笔记
 ### 代码解读及配置运行
 
-![](LOAM/result0.png)
+![](LOAM/result.png)
 
 ## ALOAM
 ### 代码解读及配置运行
