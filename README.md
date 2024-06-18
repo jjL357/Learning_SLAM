@@ -7,6 +7,7 @@
 
 ## ALOAM
 ### 代码解读及配置运行
+![](ALOAM/ALOAM_result.png)
 ## LeGO-LOAM
 ### 论文笔记 
 ### 代码解读
